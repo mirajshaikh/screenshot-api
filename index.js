@@ -4,10 +4,16 @@ const express = require('express'),
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
-});
+}); */
+var d = new Date();
+var n = d.getTime();
+app.use(express.static("public"));
 app.get("/api", async(request, response) => {
+    let url = request.query.url
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+    newUrl = 'http://' + url
     try {
         const browser = await puppeteer.launch({
             args: ['--no-sandbox']
@@ -15,22 +21,22 @@ app.get("/api", async(request, response) => {
         const page = await browser.newPage();
         await page.setViewport({
             width: 1200,
-            height: 1080
+            height: 720
         });
-        let fulls = request.query.full
-        if (fulls == 1) {
-            prams = { fullPage: true }
-        } else {
-            prams = { fullPage: false }
+        let fullpag = request.query.fullpage
+        let full = false
+        if (fullpag == 'true') {
+            full = true
         }
-        console.log(request.query.url)
-
-        await page.goto(request.query.url); // Read url query parameter.
-        const image = await page.screenshot({ prams, path: 'screenshot.png' });
+        await page.waitFor(5000);
+        let fullFileName = url + '-' + n + '.png'
+        await page.goto(newUrl); // Read url query parameter.
+        const image = await page.screenshot({ fullPage: full });
         await browser.close();
-        response.download('./example.png');
+        response.set('Content-Type', 'image/png');
+        response.send(image);
     } catch (error) {
-        console.log(error);
+        response.send(error);
     }
 });
 
