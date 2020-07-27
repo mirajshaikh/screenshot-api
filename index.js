@@ -7,20 +7,21 @@ app.use(express.json())
 /* app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 }); */
-var d = new Date();
-var n = d.getTime();
+
 app.use(express.static("public"));
 app.get("/api", async(request, response) => {
     let url = request.query.url
-    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
-    newUrl = 'http://' + url
+    var d = new Date();
+    var n = d.getTime();
+    let fullFileName = url + '-' + n + '.png'
+    url = "http://" + url
     try {
         const browser = await puppeteer.launch({
             args: ['--no-sandbox']
         });
         const page = await browser.newPage();
         await page.setViewport({
-            width: 1200,
+            width: 1280,
             height: 720
         });
         let fullpag = request.query.fullpage
@@ -29,14 +30,14 @@ app.get("/api", async(request, response) => {
             full = true
         }
         await page.waitFor(5000);
-        let fullFileName = url + '-' + n + '.png'
-        await page.goto(newUrl); // Read url query parameter.
-        const image = await page.screenshot({ fullPage: full });
+
+        await page.goto(url); // Read url query parameter.
+        const image = await page.screenshot( {path:"public/images/screenshot/"+fullFileName,fullPage: full});
         await browser.close();
-        response.set('Content-Type', 'image/png');
-        response.send(image);
+        response.set('Content-Type', 'text/json');
+        response.json({imageurl:"/images/screenshot/"+fullFileName});
     } catch (error) {
-        response.send(error);
+        response.status(500).send('Something went Wrong!');
     }
 });
 

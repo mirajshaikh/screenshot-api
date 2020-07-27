@@ -6,9 +6,12 @@
 }
 
 body {
-    background-image: url(./back.svg);
+    background-image: url(images/back.svg);
 }
-
+#main{
+align-content: center;
+text-align: center;
+}
 *:focus {
     outline: none;
 }
@@ -129,4 +132,24 @@ input[type=text] {
 
 .toggleSwitch p {
     margin: 10px;
+}
+
+#link__button{
+        display: inline-block;
+        border: none;
+        margin:30px auto;
+        color: white;
+        font-size: 18px;
+        background-color: #2196F3;
+        border-radius: 50px;
+        cursor: pointer;
+        padding:15px 20px
+}
+
+@media screen and (max-width:480px){
+    input[type=text] {
+        width: 230px;
+    }
+    .submitBtn {
+        width: 100px;}
 }
