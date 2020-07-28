@@ -7,13 +7,15 @@ app.use(express.json())
 /* app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 }); */
-
+async function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 app.use(express.static("public"));
 app.get("/api", async(request, response) => {
     let url = request.query.url
-    var d = new Date();
-    var n = d.getTime();
-    let fullFileName = url + '-' + n + '.png'
+    var d = Math.random()*10;
+    var n = Math.floor(d);
+    let fullFileName = "screenshot" + '-' + n + '.png'
     url = "http://" + url
     try {
         const browser = await puppeteer.launch({
@@ -30,8 +32,8 @@ app.get("/api", async(request, response) => {
             full = true
         }
         await page.waitFor(5000);
-
         await page.goto(url); // Read url query parameter.
+        await timeout(1000);
         const image = await page.screenshot( {path:"public/images/screenshot/"+fullFileName,fullPage: full});
         await browser.close();
         response.set('Content-Type', 'text/json');

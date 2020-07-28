@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>  
+<script async src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap&text=MirajShaikh" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
     <title>Screenshot API</title>
 </head>
 
 <body>
+    <header><a href="https://mirajshaikh.com/">Miraj <br> Shaikh</a></header>
     <div id="main">
     <div class="heading">
         <h1>Website Screenshot </h1>
@@ -33,45 +36,15 @@
     </form>
     <div>
         <div><a id="link" href="" download="Screenshot.png"><button id="link__button">Download Screenshot</button></a></div>
-        <div><h1 id="error">Something went Wrong ☹️ Please try Again Later</h1></div>
+        <div><h4 id="error">Something went Wrong 😔 Please Check Your URL or try Again Later</h4></div>
+       <div class="loader">
+        <div id="loader"><lottie-player src="./images/loader.json" background="transparent"  speed="1"  style="width: 600px; height: 600px;" loop autoplay></lottie-player>
+        </div><h4 class="loader__message">Please Wait... We are Capturing Your Screenshot 😍</h4></div>
        <div><img id="image" src="" width="70%"></img></div>
     </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script>  
-       $(document).ready(function(){
-            $('#error').hide()
-            $('#link').hide()  
-            $('#image').hide() 
-        })
-        $('.submitBtn').click(function(){
-            $('#error').hide()
-            $('#link').hide()
-            $('#image').hide()
-        })
-        function myFunction() {
-            var url = ($("#url").val())
-            url = url.replace(/(^\w+:|^)\/\//, '');
-            var fullpage = $("#full").is(':checked');
-            var d = new Date();
-            var n = d.getTime();
-            let fullFileName = url + '-' + n + '.png'
-                // document.getElementById('image').src = 'api/?' + 'url=' + url + '&fullpage=' + fullpage;
-            fetch('api/?url=' + url + '&fullpage=' + fullpage).then(response => response.json())
-            .then(data => {console.log(data)
-                $('#error').hide()
-                $('#link').attr('download', fullFileName)
-                document.getElementById('image').src = data.imageurl;
-                document.getElementById('link').href = data.imageurl;
-                $('#link').show()
-                 $('#image').show()
-                })
-            .catch(error => {
-                console.log(error)
-                $('#link').hide()
-                $('#error').show()});
-        };
-    </script>
+<footer>Made With ❤️ By <a href="https://mirajshaikh.com/" target="_blank">Miraj</a></footer>
+<script src="./script.js"></script>
 
 </body>
 

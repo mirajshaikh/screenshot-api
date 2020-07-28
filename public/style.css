@@ -7,10 +7,24 @@
 
 body {
     background-image: url(images/back.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+header{
+    padding-left: 10%;
+    padding-top: 1%;
+}
+header a{
+    font-family: Megrim !important;
+    color: rgb(52, 52, 53);
+    font-size: 30px;
+    text-decoration: none;
 }
 #main{
 align-content: center;
 text-align: center;
+min-height: 90vh;
+
 }
 *:focus {
     outline: none;
@@ -79,7 +93,7 @@ input:checked+.slider:before {
 }
 
 input[type=text] {
-    padding-left: 20px;
+    padding: 0px 20px;
     border: none;
     width: 390px;
     font-size: 18px;
@@ -97,6 +111,9 @@ input[type=text] {
     border-radius: 0px 50px 50px 0px;
     cursor: pointer;
     height: 50px;
+}
+.submitBtn:disabled{
+    cursor: not-allowed;
 }
 
 .toggleSwitch {
@@ -145,6 +162,29 @@ input[type=text] {
         cursor: pointer;
         padding:15px 20px
 }
+#image{
+    padding-bottom: 30px;
+}
+
+
+.loader{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+#loader{
+    margin-top: -150px;
+    pointer-events: none;
+    justify-self: center;
+}
+.loader__message{
+    margin-top: -150px;
+}
+footer,footer a{
+    text-align: center;
+    padding: 10px 0px;
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
 
 @media screen and (max-width:480px){
     input[type=text] {
@@ -152,4 +192,7 @@ input[type=text] {
     }
     .submitBtn {
         width: 100px;}
+        input[type=text]::placeholder{
+            font-size: 12px;
+        }
 }
