@@ -199,7 +199,7 @@ footer,footer a{
             max-width: 100vw;
         }
         lottie-player{
-            width: 400px !important;
+            width: 300px !important;
             height: 500px !important;
         }
 }
