@@ -11,8 +11,13 @@ $('.submitBtn').click(function(){
     $('#link').hide()
     $('#image').hide()
 })
+function scrollWin() {
+    window.scrollTo(0, 150);
+  }
 function myFunction() {
     $('.loader').show()
+    $('.toggleSwitch').hide()
+    scrollWin()
     $('.submitBtn').attr('disabled',true)
     var url = ($("#url").val())
     url = url.replace(/(^\w+:|^)\/\//, '');
@@ -24,12 +29,14 @@ function myFunction() {
     fetch('api/?url=' + url + '&fullpage=' + fullpage).then(response => response.json())
     .then(data => {console.log(data)
         $('#error').hide()
+        
         $('#link').attr('download', fullFileName)
         document.getElementById('image').src = data.imageurl;
         document.getElementById('link').href = data.imageurl;
         $('#link').show()
          $('#image').show()
          $('.loader').hide()
+        $('.toggleSwitch').show()
          $('.submitBtn').attr('disabled',false)
         })
     .catch(error => {
@@ -37,5 +44,6 @@ function myFunction() {
         $('#link').hide()
         $('#error').show()
         $('.loader').hide()
+        $('.toggleSwitch').show()
         $('.submitBtn').attr('disabled',false)});
 };

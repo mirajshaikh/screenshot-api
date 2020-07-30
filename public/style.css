@@ -23,8 +23,7 @@ header a{
 #main{
 align-content: center;
 text-align: center;
-min-height: 90vh;
-
+height: 80vh;
 }
 *:focus {
     outline: none;
@@ -151,10 +150,10 @@ input[type=text] {
     margin: 10px;
 }
 
-#link__button{
+#download__button{
         display: inline-block;
         border: none;
-        margin:30px auto;
+        margin:10px auto;
         color: white;
         font-size: 18px;
         background-color: #2196F3;
@@ -163,7 +162,7 @@ input[type=text] {
         padding:15px 20px
 }
 #image{
-    padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 
@@ -184,6 +183,11 @@ footer,footer a{
     padding: 10px 0px;
     background-color: rgb(46, 46, 46);
     color: white;
+}
+footer{
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
 }
 
 @media screen and (max-width:480px){
