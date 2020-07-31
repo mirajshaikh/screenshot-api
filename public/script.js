@@ -18,6 +18,7 @@ function myFunction() {
     $('.loader').show()
     $('.toggleSwitch').hide()
     scrollWin()
+    $('#full').attr('checked', false)
     $('.submitBtn').attr('disabled',true)
     var url = ($("#url").val())
     url = url.replace(/(^\w+:|^)\/\//, '');
