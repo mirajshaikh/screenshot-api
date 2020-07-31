@@ -23,7 +23,7 @@ header a{
 #main{
 align-content: center;
 text-align: center;
-height: 80vh;
+padding-bottom: 70px;
 }
 *:focus {
     outline: none;
@@ -188,6 +188,9 @@ footer{
     position: fixed;
     width: 100vw;
     bottom: 0;
+}
+body{
+    min-height: 100vh;
 }
 
 @media screen and (max-width:480px){
