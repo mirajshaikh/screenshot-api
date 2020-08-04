@@ -34,7 +34,6 @@ app.get("/api", async(request, response) => {
         await page.waitFor(5000);
         await page.goto(url); // Read url query parameter.
         await timeout(2000);
-        await autoScroll(page);
         const image = await page.screenshot( {path:"public/images/screenshot/"+fullFileName,fullPage: full});
         await browser.close();
         response.set('Content-Type', 'text/json');
@@ -43,25 +42,6 @@ app.get("/api", async(request, response) => {
         response.status(500).send('Something went Wrong!');
     }
 });
-
-async function autoScroll(page){
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-
-                if(totalHeight >= scrollHeight){
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-}
 
 var listener = app.listen(3000, function() {
     console.log('Your app is listening on port ' + listener.address().port);
